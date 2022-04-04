@@ -1,0 +1,5 @@
+Goal of this package is to compare different ways of providing dependencies.
+Using objects has proven to be problematic when it comes to unit testing.
+Out of two libraries (ScalaMock and MockitoScala) supporting a way to mock scala objects
+none of them has worked in my environment. Depending on the complexity of a module
+using OOP style or Scala Cake Pattern might be the way to go.
