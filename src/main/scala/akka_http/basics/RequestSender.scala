@@ -1,4 +1,4 @@
-package akkahttp
+package akka_http.basics
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
