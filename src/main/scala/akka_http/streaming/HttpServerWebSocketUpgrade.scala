@@ -19,6 +19,7 @@ object HttpServerWebSocketUpgrade {
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
 
+    // Flow[Input, Output, MaterializedValue]
     def greeter: Flow[Message, Message, Any] =
       Flow[Message].mapConcat {
         case tm: TextMessage =>
