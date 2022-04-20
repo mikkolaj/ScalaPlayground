@@ -3,27 +3,16 @@ package akka_streams.basics
 import akka.NotUsed
 import akka.actor.ActorSystem
 import akka.stream.scaladsl._
-import akka.util.ByteString
+import akka_streams.datastructures.Author
+import akka_streams.datastructures.{Hashtag, Tweet}
 
-import java.nio.file.Paths
 import scala.concurrent.ExecutionContext
 
-final case class Author(handle: String)
+object TweetExample {
+  implicit val system: ActorSystem = ActorSystem("reactive-tweets")
+  implicit val executionContext: ExecutionContext = system.dispatcher
 
-final case class Hashtag(name: String)
-
-final case class Tweet(author: Author, timestamp: Long, body: String) {
-  def hashtags: Set[Hashtag] =
-    body
-      .split(" ")
-      .collect {
-        case t if t.startsWith("#") => Hashtag(t.replaceAll("[^#\\w]", ""))
-      }
-      .toSet
-}
-
-object TweetExample extends App {
-  val akkaTag = Hashtag("#akka")
+  val akkaTag: Hashtag = Hashtag("#akka")
 
   val tweets: Source[Tweet, NotUsed] = Source(
     Tweet(Author("rolandkuhn"), System.currentTimeMillis, "#akka rocks!") ::
@@ -38,15 +27,14 @@ object TweetExample extends App {
       Tweet(Author("drama"), System.currentTimeMillis, "we compared #apples to #oranges!") ::
       Nil)
 
-  implicit val system: ActorSystem = ActorSystem("reactive-tweets")
-  implicit val executionContext: ExecutionContext = system.dispatcher
-
-  tweets
-    .filterNot(_.hashtags.contains(akkaTag)) // Remove all tweets containing #akka hashtag
-    .map(_.hashtags) // Get all sets of hashtags ...
-    .reduce(_ ++ _) // ... and reduce them to a single set, removing duplicates across all tweets
-    .mapConcat(identity) // Flatten the set of hashtags to a stream of hashtags
-    .map(_.name.toUpperCase) // Convert all hashtags to upper case
-    .runWith(Sink.foreach(println)) // Attach the Flow to a Sink that will finally print the hashtags
-    .onComplete(_ => system.terminate())
+  def main(args: Array[String]): Unit = {
+    tweets
+      .filterNot(_.hashtags.contains(akkaTag)) // Remove all tweets containing #akka hashtag
+      .map(_.hashtags) // Get all sets of hashtags ...
+      .reduce(_ ++ _) // ... and reduce them to a single set, removing duplicates across all tweets
+      .mapConcat(identity) // Flatten the set of hashtags to a stream of hashtags
+      .map(_.name.toUpperCase) // Convert all hashtags to upper case
+      .runWith(Sink.foreach(println)) // Attach the Flow to a Sink that will finally print the hashtags
+      .onComplete(_ => system.terminate())
+  }
 }
