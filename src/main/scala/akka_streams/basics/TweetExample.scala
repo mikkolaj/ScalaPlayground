@@ -3,8 +3,7 @@ package akka_streams.basics
 import akka.NotUsed
 import akka.actor.ActorSystem
 import akka.stream.scaladsl._
-import akka_streams.datastructures.Author
-import akka_streams.datastructures.{Hashtag, Tweet}
+import akka_streams.datastructures.{Author, Hashtag, Tweet, TweetResource}
 
 import scala.concurrent.ExecutionContext
 
@@ -12,24 +11,9 @@ object TweetExample {
   implicit val system: ActorSystem = ActorSystem("reactive-tweets")
   implicit val executionContext: ExecutionContext = system.dispatcher
 
-  val akkaTag: Hashtag = Hashtag("#akka")
-
-  val tweets: Source[Tweet, NotUsed] = Source(
-    Tweet(Author("rolandkuhn"), System.currentTimeMillis, "#akka rocks!") ::
-      Tweet(Author("patriknw"), System.currentTimeMillis, "#akka !") ::
-      Tweet(Author("bantonsson"), System.currentTimeMillis, "#akka !") ::
-      Tweet(Author("drewhk"), System.currentTimeMillis, "#akka !") ::
-      Tweet(Author("ktosopl"), System.currentTimeMillis, "#akka on the rocks!") ::
-      Tweet(Author("mmartynas"), System.currentTimeMillis, "wow #akka !") ::
-      Tweet(Author("akkateam"), System.currentTimeMillis, "#akka rocks!") ::
-      Tweet(Author("bananaman"), System.currentTimeMillis, "#bananas rock!") ::
-      Tweet(Author("appleman"), System.currentTimeMillis, "#apples rock!") ::
-      Tweet(Author("drama"), System.currentTimeMillis, "we compared #apples to #oranges!") ::
-      Nil)
-
   def main(args: Array[String]): Unit = {
-    tweets
-      .filterNot(_.hashtags.contains(akkaTag)) // Remove all tweets containing #akka hashtag
+    TweetResource.tweets
+      .filterNot(_.hashtags.contains(TweetResource.akkaTag)) // Remove all tweets containing #akka hashtag
       .map(_.hashtags) // Get all sets of hashtags ...
       .reduce(_ ++ _) // ... and reduce them to a single set, removing duplicates across all tweets
       .mapConcat(identity) // Flatten the set of hashtags to a stream of hashtags
