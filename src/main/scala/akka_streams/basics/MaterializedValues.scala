@@ -18,7 +18,7 @@ object MaterializedValues extends App {
   val counterGraph: RunnableGraph[Future[Int]] =
     TweetResource.tweets.via(count).toMat(sumSink)(Keep.right)
 
-  // materializationa happens only after calling run, RunnableGraph
+  // materialization happens only after calling run, RunnableGraph
   // is a blueprint that might result in different values after each run
   // (based on the source)
   val sum: Future[Int] = counterGraph.run()
