@@ -1,9 +1,8 @@
-package akka_streams.basics
+package akka_streams.examples
 
-import akka.NotUsed
 import akka.actor.ActorSystem
 import akka.stream.scaladsl._
-import akka_streams.datastructures.{Author, Hashtag, Tweet, TweetResource}
+import akka_streams.datastructures.TweetResource
 
 import scala.concurrent.ExecutionContext
 
