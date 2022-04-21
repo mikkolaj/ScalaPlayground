@@ -5,7 +5,6 @@ import akka.stream.scaladsl.Source
 import akka_streams.datastructures.{LineProvider, LineRecord}
 
 import scala.concurrent.ExecutionContext
-import scala.concurrent.duration._
 
 object GroupingExample extends App {
   implicit val system: ActorSystem = ActorSystem("QuickStart")
@@ -13,9 +12,11 @@ object GroupingExample extends App {
 
   val source = Source.fromIterator(() => LineProvider.lines.iterator)
 
+  val batchSize = 4
+
   val result = source
     .map(LineRecord.fromLine)
-    .groupedWithin(4, 1.day)
+    .grouped(batchSize)
     .map(batch => batch
       .groupBy(_.key)
       .map(sumRecords)
