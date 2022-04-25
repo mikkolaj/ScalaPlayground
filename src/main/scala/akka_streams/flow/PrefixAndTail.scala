@@ -29,7 +29,7 @@ object PrefixAndTail extends App {
       case (head, tail) => new Aggregator(head.head, tail)
     }
     .flatMapConcat(_.aggregate())
-    .runForeach(el => println(el))
+    .runForeach(println)
 
   aggregationResult
     .onComplete { result =>
