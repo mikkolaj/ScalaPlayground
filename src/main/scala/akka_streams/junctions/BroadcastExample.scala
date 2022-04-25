@@ -1,9 +1,9 @@
 package akka_streams.junctions
 
-import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
-import akka.stream.{ClosedShape, UniformFanOutShape}
 import akka.stream.scaladsl.{Broadcast, Flow, GraphDSL, RunnableGraph, Sink}
+import akka.stream.{ClosedShape, UniformFanOutShape}
+import akka.{Done, NotUsed}
 import akka_streams.datastructures.{Author, Hashtag, Tweet, TweetResource}
 
 import scala.concurrent.{ExecutionContext, Future}

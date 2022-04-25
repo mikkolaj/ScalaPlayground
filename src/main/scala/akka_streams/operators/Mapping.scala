@@ -3,7 +3,7 @@ package akka_streams.operators
 import akka.NotUsed
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
-import akka.stream.scaladsl.{Flow, Keep, Source}
+import akka.stream.scaladsl.{Flow, Source}
 
 import scala.concurrent.{ExecutionContext, Future}
 

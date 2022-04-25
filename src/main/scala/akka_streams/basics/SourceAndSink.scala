@@ -2,11 +2,11 @@ package akka_streams.basics
 
 // based on: https://doc.akka.io/docs/akka/current/stream/stream-quickstart.html
 
-import akka.{Done, NotUsed}
 import akka.actor.ActorSystem
 import akka.stream.IOResult
 import akka.stream.scaladsl.{FileIO, Flow, Keep, Sink, Source}
 import akka.util.ByteString
+import akka.{Done, NotUsed}
 
 import java.nio.file.Paths
 import scala.concurrent.duration.DurationInt
