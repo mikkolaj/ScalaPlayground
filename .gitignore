@@ -3,3 +3,5 @@
 .idea
 .bsp
 target
+*/target
+*/.idea
