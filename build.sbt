@@ -12,6 +12,13 @@ val akkaHttpVersion = "10.2.9"
 
 javaOptions += s"-Dconfig.file=${sourceDirectory.value}/main/resources/application.conf"
 
+// Workaround for NoSuchFieldException using withObjectMocked:
+Test / javaOptions ++= Seq(
+  "--add-opens=java.base/java.lang=ALL-UNNAMED",
+  "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED"
+)
+Test / fork := true
+
 libraryDependencies ++= Seq(
   // akka typed
   "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,

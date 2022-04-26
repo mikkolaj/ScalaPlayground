@@ -6,7 +6,8 @@ import org.scalatest.GivenWhenThen
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
-
+// Workaround for NoSuchFieldException:
+// --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED
 class BookValidatorTest extends AnyFeatureSpec with GivenWhenThen {
   val BookName = "test"
 
