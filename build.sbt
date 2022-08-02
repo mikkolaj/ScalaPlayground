@@ -1,3 +1,5 @@
+import Dependencies._
+
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "2.13.8"
@@ -6,9 +8,6 @@ lazy val root = (project in file("."))
   .settings(
     name := "ScalaSBT"
   )
-
-val akkaVersion = "2.6.19"
-val akkaHttpVersion = "10.2.9"
 
 javaOptions += s"-Dconfig.file=${sourceDirectory.value}/main/resources/application.conf"
 
@@ -19,27 +18,10 @@ Test / javaOptions ++= Seq(
 )
 Test / fork := true
 
-libraryDependencies ++= Seq(
-  // akka typed
-  "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
-  // akka streams
-  "com.typesafe.akka" %% "akka-stream" % akkaVersion,
-  // akka http
-  "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
-  "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
-  "com.typesafe" % "config" % "1.4.2",
+libraryDependencies ++= dependencies
 
-  // DB connection
-  "org.scalikejdbc" %% "scalikejdbc" % "3.5.0",
-  "org.scalikejdbc" %% "scalikejdbc-config" % "3.5.0",
-  "org.postgresql" % "postgresql" % "42.3.6",
+// tasks
 
-  // logging
-  "org.slf4j" % "slf4j-simple" % "1.7.36",
+lazy val hello = taskKey[Unit]("Prints 'Hello World'")
 
-  // testing
-  "org.scalamock" %% "scalamock" % "5.2.0" % Test,
-  "org.scalatest" %% "scalatest" % "3.2.11" % Test,
-  "org.mockito" %% "mockito-scala" % "1.17.5" % Test,
-)
-
+hello := println("hello world!")
