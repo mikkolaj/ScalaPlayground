@@ -17,11 +17,10 @@ object ReadTest extends App {
   val resultImplicit: Option[Company] = DB.readOnly { implicit session: DBSession =>
     sql"select * from Company where id = 1"
       .map(resultSet => Company.from(resultSet))
-      .single().apply()
+      .single()
+      .apply()
   }
 
   println(result)
   println(resultImplicit)
 }
-
-

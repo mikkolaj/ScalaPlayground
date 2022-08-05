@@ -25,7 +25,7 @@ object PrefixAndTail extends App {
     // does not provide enough elements
     .prefixAndTail(1)
     .map {
-      case (Nil, _) => throw new RuntimeException("Stream does not contain required metadata.")
+      case (Nil, _)     => throw new RuntimeException("Stream does not contain required metadata.")
       case (head, tail) => new Aggregator(head.head, tail)
     }
     .flatMapConcat(_.aggregate())
@@ -35,7 +35,7 @@ object PrefixAndTail extends App {
     .onComplete { result =>
       result match {
         case Failure(exception) => logger.error(exception.getMessage)
-        case _ =>
+        case _                  =>
       }
       actorSystem.terminate()
     }

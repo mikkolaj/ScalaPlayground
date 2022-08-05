@@ -1,6 +1,6 @@
 package scalike
 
-import scalikejdbc.{AutoSession, DB, DBSession, scalikejdbcSQLInterpolationImplicitDef}
+import scalikejdbc.{scalikejdbcSQLInterpolationImplicitDef, AutoSession, DB, DBSession}
 
 object Transactions extends App {
   Initializer.init()
@@ -13,10 +13,10 @@ object Transactions extends App {
     sql"select * from company".map(Company.from).list().apply()
   }
 
-  // AutoSession provides a new session
+  // AutoSession provides a new session here
   println(getAllNames())
 
-  DB localTx { implicit session =>
+  DB.localTx { implicit session =>
     addCompany("RacComp", Some("Dust"))
     println(getAllNames())
   }

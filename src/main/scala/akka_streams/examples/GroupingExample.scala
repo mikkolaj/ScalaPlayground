@@ -17,9 +17,10 @@ object GroupingExample extends App {
   val result = source
     .map(LineRecord.fromLine)
     .grouped(batchSize)
-    .map(batch => batch
-      .groupBy(_.key)
-      .map(sumRecords)
+    .map(batch =>
+      batch
+        .groupBy(_.key)
+        .map(sumRecords)
     )
     .runForeach(println)
 

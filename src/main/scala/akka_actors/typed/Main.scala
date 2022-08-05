@@ -12,9 +12,12 @@ object Main {
     val classActorRef = system.systemActorOf(classActor(0), "classActor")
     val objectActorRef = system.systemActorOf(ActorFromObject(0, 3), "objectActor")
 
-    LazyList.from(0).takeWhile(_ < 4).foreach(_ => {
-      classActorRef ! SayHi("classActor", system.ignoreRef)
-      objectActorRef ! SayHi("objectActor", system.ignoreRef)
-    })
+    LazyList
+      .from(0)
+      .takeWhile(_ < 4)
+      .foreach(_ => {
+        classActorRef ! SayHi("classActor", system.ignoreRef)
+        objectActorRef ! SayHi("objectActor", system.ignoreRef)
+      })
   }
 }

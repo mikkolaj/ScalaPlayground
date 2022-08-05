@@ -17,6 +17,7 @@ object Dependencies {
 
     // DB connection
     "org.scalikejdbc" %% "scalikejdbc" % scalikejdbcVersion,
+    "org.scalikejdbc" %% "scalikejdbc-interpolation" % scalikejdbcVersion,
     "org.scalikejdbc" %% "scalikejdbc-config" % scalikejdbcVersion,
     "org.postgresql" % "postgresql" % "42.3.6",
 

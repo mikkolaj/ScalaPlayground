@@ -31,10 +31,10 @@ object HttpServerWebSocketUpgrade {
       }
 
     val requestHandler: HttpRequest => HttpResponse = {
-      case req@HttpRequest(GET, Uri.Path("/greeter"), _, _, _) =>
+      case req @ HttpRequest(GET, Uri.Path("/greeter"), _, _, _) =>
         req.attribute(AttributeKeys.webSocketUpgrade) match {
           case Some(upgrade) => upgrade.handleMessages(greeter)
-          case None => HttpResponse(400, entity = "Not a valid websocket request!")
+          case None          => HttpResponse(400, entity = "Not a valid websocket request!")
         }
       case r: HttpRequest =>
         r.discardEntityBytes() // important to drain incoming HTTP Entity stream

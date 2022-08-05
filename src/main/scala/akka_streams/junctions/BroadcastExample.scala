@@ -18,7 +18,8 @@ object BroadcastExample extends App {
   // stream structures formed using junctions are called Graphs and are constructed using GraphDSL
 
   val writeAuthors: Sink[Author, Future[Done]] = Sink.foreach((author: Author) => println(s"Author: ${author.handle}"))
-  val writeHashtags: Sink[Hashtag, Future[Done]] = Sink.foreach((hashtag: Hashtag) => println(s"Hashtag: ${hashtag.name}"))
+  val writeHashtags: Sink[Hashtag, Future[Done]] =
+    Sink.foreach((hashtag: Hashtag) => println(s"Hashtag: ${hashtag.name}"))
 
   // fromGraph is able to transform a closed graph into a runnable graph
   // Graph and RunnableGraph are immutable, thread-safe and shareable
@@ -32,9 +33,9 @@ object BroadcastExample extends App {
 
     // closed shape means it's a fully connected ("closed") graph
     ClosedShape
-    // there are other graph shapes with one or more unconnected ports,
-    // such a graph is called a partial graph and can be used to compose and
-    // nest graphs or even form sources, sinks and flows
+  // there are other graph shapes with one or more unconnected ports,
+  // such a graph is called a partial graph and can be used to compose and
+  // nest graphs or even form sources, sinks and flows
   })
 
   graph.run()

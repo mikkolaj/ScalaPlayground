@@ -1,7 +1,7 @@
 package scalike
 
 import scalikejdbc.config._
-import scalikejdbc.{DB, scalikejdbcSQLInterpolationImplicitDef}
+import scalikejdbc.{scalikejdbcSQLInterpolationImplicitDef, DB}
 
 object Initializer {
   def init(): Unit = {
@@ -13,7 +13,7 @@ object Initializer {
     DBs.closeAll()
     "bla" match {
       case "xdf" => 1
-      case "f" => 1
+      case "f"   => 1
     }
   }
 
