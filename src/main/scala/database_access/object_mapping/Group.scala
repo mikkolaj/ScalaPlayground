@@ -1,4 +1,4 @@
-package scalike.object_mapping
+package database_access.object_mapping
 
 import scalikejdbc._
 
