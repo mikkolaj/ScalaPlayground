@@ -1,6 +1,6 @@
-package scalike.object_mapping
+package database_access.object_mapping
 
-import scalike.Initializer
+import database_access.Initializer
 import scalikejdbc._
 
 object InterpolationOfMappings extends App {

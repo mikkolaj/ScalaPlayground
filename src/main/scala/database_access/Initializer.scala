@@ -1,4 +1,4 @@
-package scalike
+package database_access
 
 import scalikejdbc.config._
 import scalikejdbc.{scalikejdbcSQLInterpolationImplicitDef, DB}
@@ -11,10 +11,6 @@ object Initializer {
 
   def stop(): Unit = {
     DBs.closeAll()
-    "bla" match {
-      case "xdf" => 1
-      case "f"   => 1
-    }
   }
 
   private def bootstrapDb(): Unit = {

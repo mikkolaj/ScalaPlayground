@@ -1,4 +1,4 @@
-package scalike
+package database_access
 
 import scalikejdbc.{scalikejdbcSQLInterpolationImplicitDef, AutoSession, DB, DBSession}
 
