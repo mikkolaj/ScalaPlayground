@@ -24,5 +24,8 @@ object RequestSender extends App {
     entityFuture.map(_.data.utf8String)
   }
 
-  sendRequest(request).foreach(println)
+  sendRequest(request).foreach { result =>
+    println(result)
+    system.terminate()
+  }
 }

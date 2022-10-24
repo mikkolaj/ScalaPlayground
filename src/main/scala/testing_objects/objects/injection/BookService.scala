@@ -1,8 +1,6 @@
 package testing_objects.objects.injection
 
-import testing_objects.objects.BookValidator
-
-class BookService(validator: IBookValidator = BookValidator) {
+class BookService(validator: IBookValidator = IBookValidator.default) {
   def isValidBook(name: String): Boolean = {
     validator.isNiceBook(name)
   }
