@@ -6,6 +6,8 @@ object Dependencies {
   private val scalikejdbcVersion = "3.5.0"
 
   val dependencies: Seq[ModuleID] = Seq(
+    // parallel collections
+    "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4",
     // akka typed
     "com.typesafe.akka" %% "akka-actor-typed" % akkaVersion,
     // akka streams
