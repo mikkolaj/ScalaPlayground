@@ -28,6 +28,8 @@ object Dependencies {
     // testing
     "org.scalamock" %% "scalamock" % "5.2.0" % Test,
     "org.scalatest" %% "scalatest" % "3.2.11" % Test,
-    "org.mockito" %% "mockito-scala" % "1.17.5" % Test
+    "org.mockito" %% "mockito-scala" % "1.17.5" % Test,
+    "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
+    "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
   )
 }
