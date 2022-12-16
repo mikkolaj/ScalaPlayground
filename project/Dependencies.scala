@@ -25,11 +25,13 @@ object Dependencies {
     "org.skinny-framework" %% "skinny-orm" % "3.1.0",
     // logging
     "org.slf4j" % "slf4j-simple" % "1.7.36",
+    "ch.qos.logback" % "logback-classic" % "1.2.11",
     // testing
     "org.scalamock" %% "scalamock" % "5.2.0" % Test,
     "org.scalatest" %% "scalatest" % "3.2.11" % Test,
     "org.mockito" %% "mockito-scala" % "1.17.5" % Test,
     "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
+    "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion % Test,
     "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
   )
 }
