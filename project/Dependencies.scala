@@ -4,8 +4,12 @@ object Dependencies {
   private val akkaVersion = "2.6.19"
   private val akkaHttpVersion = "10.2.9"
   private val scalikejdbcVersion = "3.5.0"
+  private val sparkVersion = "3.2.1"
 
   val dependencies: Seq[ModuleID] = Seq(
+    // spark
+    "org.apache.spark" %% "spark-core" % sparkVersion,
+    "org.apache.spark" %% "spark-sql" % sparkVersion,
     // parallel collections
     "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4",
     // akka typed
@@ -16,6 +20,8 @@ object Dependencies {
     "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
     "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
     "com.typesafe" % "config" % "1.4.2",
+    // akka kafka
+    "com.typesafe.akka" %% "akka-stream-kafka" % "2.1.0",
     // DB connection
     "org.scalikejdbc" %% "scalikejdbc" % scalikejdbcVersion,
     "org.scalikejdbc" %% "scalikejdbc-interpolation" % scalikejdbcVersion,

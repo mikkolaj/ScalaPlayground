@@ -1,0 +1,11 @@
+services:
+  scala-db:
+    image: postgres:latest
+    build:
+      context: .
+    container_name: scala-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: scala-db
+      POSTGRES_PASSWORD: pwd
