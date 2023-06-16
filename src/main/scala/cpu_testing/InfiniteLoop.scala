@@ -3,12 +3,12 @@ package cpu_testing
 import scala.collection.mutable
 
 object InfiniteLoop extends App {
-  val list = mutable.ListBuffer()
+  val list = mutable.ListBuffer[BigInt]()
   LazyList.from(1).foreach { number =>
-    if (number * number % 2 == 0) {
+    if (number % 2 == 1) {
       list += number * number
     } else {
-      list -= list.head
+      list.headOption.foreach(el => list -= el)
     }
   }
 }

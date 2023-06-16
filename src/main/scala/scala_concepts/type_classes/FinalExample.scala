@@ -1,11 +1,10 @@
 package scala_concepts.type_classes
 
-//import scala_concepts.type_classes.Show
-import Show.ops._
+import scala_concepts.type_classes.Show.ops._
 
 object FinalExample extends App {
   // Default implicits are imported as Category 2, so it's possible to define our own implementation
-  implicit val intCanShowDifferently: Show[Int] = (int: Int) => s"Int: $int"
+  implicit val intCanShowDifferently: Show[Int] = (int: Int) => s"Different Int: $int"
   println(show(25))
 }
 
