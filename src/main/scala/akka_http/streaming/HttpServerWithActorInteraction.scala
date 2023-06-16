@@ -36,7 +36,7 @@ object HttpServerWithActorInteraction {
     def apply: Behaviors.Receive[Message] = apply(List.empty)
 
     def apply(bids: List[Bid]): Behaviors.Receive[Message] = Behaviors.receive {
-      case (ctx, bid@Bid(userId, offer)) =>
+      case (ctx, bid @ Bid(userId, offer)) =>
         ctx.log.info(s"Bid complete: $userId, $offer")
         apply(bids :+ bid)
       case (_, GetBids(replyTo)) =>

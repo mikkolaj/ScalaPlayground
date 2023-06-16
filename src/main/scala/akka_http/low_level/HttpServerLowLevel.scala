@@ -22,9 +22,7 @@ object HttpServerLowLevel {
 
     val requestHandler: HttpRequest => HttpResponse = {
       case HttpRequest(GET, Uri.Path("/"), _, _, _) =>
-        HttpResponse(entity = HttpEntity(
-          ContentTypes.`text/html(UTF-8)`,
-          "<html><body>Hello world!</body></html>"))
+        HttpResponse(entity = HttpEntity(ContentTypes.`text/html(UTF-8)`, "<html><body>Hello world!</body></html>"))
 
       case HttpRequest(GET, Uri.Path("/ping"), _, _, _) =>
         HttpResponse(entity = "PONG!")

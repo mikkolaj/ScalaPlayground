@@ -37,8 +37,9 @@ object SourceAndSink extends App {
 
   // flow is like a source, but with "open" input
   val lineSink: Sink[String, Future[IOResult]] =
-  // we convert each flowing string into a ByteString
-    Flow[String].map(s => ByteString(s + "\n"))
+    // we convert each flowing string into a ByteString
+    Flow[String]
+      .map(s => ByteString(s + "\n"))
       // toMat connects a flow and sink, Keep.right is a function
       // wchich combines materialized values (from flow and sink) into one
       // by taking the rightmost one (from sink)

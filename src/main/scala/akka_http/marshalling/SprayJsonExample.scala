@@ -50,7 +50,7 @@ object SprayJsonExample {
   def saveOrder(order: Order): Future[Done] = {
     orders = order match {
       case Order(items) => items ::: orders
-      case _ => orders
+      case _            => orders
     }
     Future {
       Done
@@ -67,7 +67,7 @@ object SprayJsonExample {
 
             onSuccess(maybeItem) {
               case Some(item) => complete(item)
-              case None => complete(StatusCodes.NotFound)
+              case None       => complete(StatusCodes.NotFound)
             }
           }
         },
@@ -75,8 +75,9 @@ object SprayJsonExample {
           path("create-order") {
             entity(as[Order]) { order =>
               val saved: Future[Done] = saveOrder(order)
-              onSuccess(saved) { _ => // we are not interested in the result value `Done` but only in the fact that it was successful
-                complete("order created")
+              onSuccess(saved) {
+                _ => // we are not interested in the result value `Done` but only in the fact that it was successful
+                  complete("order created")
               }
             }
           }

@@ -16,10 +16,7 @@ object RequestSender extends App {
 
   // akkaHttp uses akkaStreams
 
-  val request = HttpRequest(
-    method = HttpMethods.GET,
-    uri = "https://pokeapi.co/api/v2/pokemon/ditto/"
-  )
+  val request = HttpRequest(method = HttpMethods.GET, uri = "https://pokeapi.co/api/v2/pokemon/ditto/")
 
   def sendRequest(httpRequest: HttpRequest): Future[String] = {
     val responseFuture = Http().singleRequest(httpRequest)
@@ -27,5 +24,8 @@ object RequestSender extends App {
     entityFuture.map(_.data.utf8String)
   }
 
-  sendRequest(request).foreach(println)
+  sendRequest(request).foreach { result =>
+    println(result)
+    system.terminate()
+  }
 }
