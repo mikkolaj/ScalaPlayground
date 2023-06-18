@@ -1,7 +1,7 @@
 package spark
 
-import org.apache.spark.SparkContext
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.{SparkConf, SparkContext}
 import spark.TimedResult.timedExecution
 
 import java.util.concurrent.TimeUnit
@@ -20,12 +20,17 @@ object SparkUi extends App {
 }
 
 object SparkInitializer {
-  val session: SparkSession = SparkSession.builder()
-    .master("local")
-    .config("spark.executor.memory", "2G")
-    .config("spark.executor.cores", "4")
+  def sessionBuilder(conf: SparkConf = new SparkConf): SparkSession = SparkSession.builder()
+    .config(conf
+      .setMaster("local")
+      .set("spark.executor.memory", "2G")
+      .set("spark.executor.cores", "4")
+      .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    )
     .getOrCreate()
-  val sc: SparkContext = session.sparkContext
+
+  lazy val session: SparkSession = sessionBuilder()
+  lazy val sc: SparkContext = session.sparkContext
 }
 
 case class TimedResult[T](result: T, duration: Duration)
