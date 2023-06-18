@@ -1,7 +1,7 @@
 package spark
 
+import org.apache.spark.SparkContext
 import org.apache.spark.sql.SparkSession
-import spark.SparkInitializer.session
 import spark.TimedResult.timedExecution
 
 import java.util.concurrent.TimeUnit
@@ -9,8 +9,7 @@ import scala.concurrent.duration.Duration
 import scala.io.StdIn
 
 object SparkUi extends App {
-  val sparkSession = session
-  val sc = sparkSession.sparkContext
+  val sc = SparkInitializer.sc
   val repartitioned = sc.parallelize(1 to 100).repartition(10)
   repartitioned.persist()
   val firstSum = timedExecution(repartitioned.sum())
@@ -21,11 +20,12 @@ object SparkUi extends App {
 }
 
 object SparkInitializer {
-  def session: SparkSession = SparkSession.builder()
+  val session: SparkSession = SparkSession.builder()
     .master("local")
     .config("spark.executor.memory", "2G")
     .config("spark.executor.cores", "4")
     .getOrCreate()
+  val sc: SparkContext = session.sparkContext
 }
 
 case class TimedResult[T](result: T, duration: Duration)
